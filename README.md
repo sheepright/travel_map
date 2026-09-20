@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 여행 사진 지도
+
+대한민국 시·도를 여행 사진으로 채우는 연도별 개인 지도 서비스입니다.
+
+## Runtime
+
+- Node.js `22.23.2`
+- npm `10.9.8`
+- Next.js `16.3.5` App Router
+- TypeScript `5.9.3`
+- `@supabase/supabase-js` `2.116.0`
+- `@supabase/ssr` `0.12.7`
 
 ## Getting Started
 
-First, run the development server:
+Node.js 버전을 맞춘 뒤 환경변수를 설정합니다.
 
 ```bash
+cp .env.example .env.local
+npm run check:env
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+필수 환경변수:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+`SUPABASE_SECRET_KEY` 같은 관리자 Key는 Server 전용이며 `NEXT_PUBLIC_` 접두사를 붙이지 않습니다.
 
-## Learn More
+## Verification
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run lint
+npm run typecheck
+npm run build
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+기본 Production build는 제한된 로컬 실행 환경에서도 재현되도록 Webpack을 사용합니다. Turbopack 검증은 `npm run build:turbopack`으로 별도 실행합니다.
