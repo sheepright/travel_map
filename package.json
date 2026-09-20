@@ -18,8 +18,10 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
+    "test": "vitest run",
     "check:env": "node scripts/check-env.mjs",
     "check:env-boundaries": "node scripts/check-env-boundaries.mjs",
+    "ci": "npm run check:env && npm run check:env-boundaries && npm run lint && npm run typecheck && npm test && npm run build",
     "supabase:version": "supabase --version",
     "supabase:start": "supabase start",
     "supabase:status": "supabase status",
@@ -35,14 +37,16 @@
     "server-only": "0.0.1"
   },
   "devDependencies": {
+    "@next/env": "16.3.5",
     "@tailwindcss/postcss": "^4",
     "@types/node": "22.20.4",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "eslint": "^9",
+    "eslint": "9.39.5",
     "eslint-config-next": "16.3.5",
     "supabase": "2.117.0",
     "tailwindcss": "^4",
-    "typescript": "5.9.3"
+    "typescript": "5.9.3",
+    "vitest": "5.0.1"
   }
 }

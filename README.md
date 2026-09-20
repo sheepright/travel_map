@@ -42,6 +42,10 @@ npm run build
 
 기본 Production build는 제한된 로컬 실행 환경에서도 재현되도록 Webpack을 사용합니다. Turbopack 검증은 `npm run build:turbopack`으로 별도 실행합니다.
 
+전체 로컬·CI 품질 Gate는 `npm run ci`로 동일하게 실행합니다. GitHub Actions,
+Merge 보호, Vercel PR Preview 활성화 절차는
+[`docs/ci-preview.md`](docs/ci-preview.md)를 따릅니다.
+
 ## Supabase 로컬 개발
 
 Supabase CLI는 프로젝트 개발 종속성으로 고정되어 있습니다. Docker가 실행
