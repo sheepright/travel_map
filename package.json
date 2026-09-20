@@ -17,7 +17,7 @@
     "build:turbopack": "next build",
     "start": "next start",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "next typegen && tsc --noEmit",
     "test": "vitest run",
     "check:env": "node scripts/check-env.mjs",
     "check:env-boundaries": "node scripts/check-env-boundaries.mjs",
