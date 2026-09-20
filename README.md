@@ -8,6 +8,7 @@
 - npm `10.9.8`
 - Next.js `16.3.5` App Router
 - TypeScript `5.9.3`
+- Tailwind CSS `4.x`
 - `@supabase/supabase-js` `2.116.0`
 - `@supabase/ssr` `0.12.7`
 
@@ -45,6 +46,16 @@ npm run build
 전체 로컬·CI 품질 Gate는 `npm run ci`로 동일하게 실행합니다. GitHub Actions,
 Merge 보호, Vercel PR Preview 활성화 절차는
 [`docs/ci-preview.md`](docs/ci-preview.md)를 따릅니다.
+
+## Git workflow
+
+- `main`: 검증이 끝난 배포 가능 코드만 유지합니다.
+- `develop`: 모든 개발 Task의 기본 통합 브랜치입니다.
+- 작업 브랜치는 필요한 경우 `develop`에서 만들고 검증 후 `develop`으로 병합합니다.
+- `develop`에서 `npm run ci`와 Task별 검증을 통과한 변경만 PR을 통해 `main`으로 병합합니다.
+
+`main`에는 직접 개발 커밋을 만들지 않습니다. 브랜치 보호와 Required Check
+설정은 [`docs/ci-preview.md`](docs/ci-preview.md)를 따릅니다.
 
 ## Supabase 로컬 개발
 
