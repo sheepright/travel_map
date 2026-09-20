@@ -37,3 +37,17 @@ npm run build
 ```
 
 기본 Production build는 제한된 로컬 실행 환경에서도 재현되도록 Webpack을 사용합니다. Turbopack 검증은 `npm run build:turbopack`으로 별도 실행합니다.
+
+## Supabase 로컬 개발
+
+Supabase CLI는 프로젝트 개발 종속성으로 고정되어 있습니다. Docker가 실행
+중인 상태에서 아래 순서로 로컬 환경을 재현할 수 있습니다.
+
+```bash
+npm run supabase:start
+npm run supabase:reset
+npm run supabase:stop
+```
+
+원격 프로젝트 연결과 migration 배포 절차는
+[`docs/supabase-workflow.md`](docs/supabase-workflow.md)를 따릅니다.

@@ -1,0 +1,2 @@
+-- Deterministic local development data belongs here.
+-- The baseline has no application tables, so this seed is intentionally empty.
