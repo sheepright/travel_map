@@ -25,14 +25,18 @@ npm run dev
 
 - `NEXT_PUBLIC_SUPABASE_URL`
 - `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
+- `SUPABASE_URL` — Server 전용
+- `SUPABASE_SECRET_KEY` — Server 전용
 
 `SUPABASE_SECRET_KEY` 같은 관리자 Key는 Server 전용이며 `NEXT_PUBLIC_` 접두사를 붙이지 않습니다.
+환경별 설정과 Key 경계는 [`docs/environment-variables.md`](docs/environment-variables.md)를 따릅니다.
 
 ## Verification
 
 ```bash
 npm run lint
 npm run typecheck
+npm run check:env-boundaries
 npm run build
 ```
 

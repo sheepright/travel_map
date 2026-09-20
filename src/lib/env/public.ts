@@ -22,12 +22,19 @@ export const getSupabasePublicEnv = () => {
 
   try {
     const parsed = new URL(url);
-    if (parsed.protocol !== "https:" && parsed.hostname !== "localhost") {
+    const isLocal = ["localhost", "127.0.0.1", "[::1]"].includes(parsed.hostname);
+    if (parsed.protocol !== "https:" && !isLocal) {
       throw new Error("HTTPS URL이 필요합니다.");
     }
   } catch (error) {
     throw new Error(
       `[환경변수 오류] NEXT_PUBLIC_SUPABASE_URL이 올바르지 않습니다: ${error instanceof Error ? error.message : "invalid URL"}`,
+    );
+  }
+
+  if (!publishableKey.startsWith("sb_publishable_")) {
+    throw new Error(
+      "[환경변수 오류] NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY는 sb_publishable_ 형식이어야 합니다.",
     );
   }
 

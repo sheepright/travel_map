@@ -19,6 +19,7 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "check:env": "node scripts/check-env.mjs",
+    "check:env-boundaries": "node scripts/check-env-boundaries.mjs",
     "supabase:version": "supabase --version",
     "supabase:start": "supabase start",
     "supabase:status": "supabase status",
@@ -30,7 +31,8 @@
     "@supabase/supabase-js": "2.116.0",
     "next": "16.3.5",
     "react": "19.2.8",
-    "react-dom": "19.2.8"
+    "react-dom": "19.2.8",
+    "server-only": "0.0.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
