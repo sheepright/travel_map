@@ -16,12 +16,30 @@ Publishable test values and never receives a Supabase Secret Key.
 ## GitHub Actions
 
 `.github/workflows/quality.yml` runs on every pull request and every push to
-`main`. The check name is `quality-gate`. Workflow permissions are read-only,
-and concurrent runs for an older revision of the same PR are cancelled.
+`develop` or `main`. The check name is `quality-gate`. Workflow permissions are
+read-only, and concurrent runs for an older revision of the same PR are
+cancelled.
 
-After the repository is published, configure a ruleset for `main`:
+## Branch workflow
 
-1. Require a pull request before merging.
+1. Start development from `develop`.
+2. For isolated work, create `feat/<task>-<summary>`, `fix/<task>-<summary>`, or
+   `chore/<task>-<summary>` from `develop`.
+3. Run `npm run ci` and the Task-specific verification before merging a work
+   branch into `develop`.
+4. Merge `develop` into `main` only through a pull request after the full quality
+   gate succeeds.
+5. Keep `main` deployable and do not commit feature work to it directly.
+
+Configure rulesets for both protected branches. `develop` should require the
+`quality-gate` check for work-branch pull requests. `main` should require a pull
+request from `develop`, the `quality-gate`, and the Vercel deployment check when
+that integration is available.
+
+For each protected branch:
+
+1. Require a pull request before merging, except when a documented emergency
+   recovery procedure explicitly allows otherwise.
 2. Require status checks to pass.
 3. Select `quality-gate` after its first successful run.
 4. Require the branch to be up to date before merging.
@@ -53,7 +71,9 @@ integration and must be selected from the repository ruleset UI.
 ## Activation checklist
 
 - [ ] Create or select a GitHub repository and add it as this checkout's remote.
-- [ ] Push `main` and confirm `quality-gate` succeeds.
+- [ ] Push `develop` and confirm `quality-gate` succeeds.
+- [ ] Configure the `develop` ruleset to require `quality-gate`.
+- [ ] Configure the `main` ruleset to require a pull request from `develop`.
 - [ ] Import that repository into a Vercel project.
 - [ ] Configure Preview and Production public environment variables separately.
 - [ ] Open a test PR and confirm a unique Vercel Preview URL is attached.
