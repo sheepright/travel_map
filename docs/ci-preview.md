@@ -29,7 +29,11 @@ cancelled.
    branch into `develop`.
 4. Merge `develop` into `main` only through a pull request after the full quality
    gate succeeds.
-5. Keep `main` deployable and do not commit feature work to it directly.
+5. After a squash or rebase release merge, create a `chore/<task>-sync-main-develop`
+   branch from `develop`, merge `main` into it, and merge that branch back into
+   `develop` through a pull request before starting the next Task. This keeps the
+   protected branches' histories aligned without force-pushing either branch.
+6. Keep `main` deployable and do not commit feature work to it directly.
 
 Configure rulesets for both protected branches. `develop` should require the
 `quality-gate` check for work-branch pull requests. `main` should require a pull
