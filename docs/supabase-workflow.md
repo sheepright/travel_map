@@ -91,6 +91,40 @@ npx supabase db push --linked
 Production reset commands are prohibited. If local and remote histories differ,
 stop and reconcile them before pushing; do not guess with `migration repair`.
 
+## Data API access control
+
+The exposed `public` schema uses an explicit-deny baseline. `anon` receives no
+application table privileges. `authenticated` receives only the operations in
+this matrix; RLS then limits rows within those operations.
+
+| Tables | `anon` | `authenticated` | Row policy |
+| --- | --- | --- | --- |
+| `map_editions`, `regions`, `map_edition_regions` | None | `SELECT` | All signed-in users |
+| `profiles` | None | `SELECT`, `UPDATE(display_name)` | `id = auth.uid()` |
+| `annual_maps`, `photo_assets`, `region_entries` | None | `SELECT` | Owner column equals `auth.uid()` |
+
+Client-side inserts, updates, and deletes for map records remain denied. Later
+tasks expose atomic writes through narrowly granted RPCs instead of reopening
+table-wide write privileges. Service-role credentials remain server-only and
+must never be used to simulate ordinary user requests.
+
+### Troubleshooting `42501`
+
+PostgREST reports missing privileges and RLS write rejections with PostgreSQL
+code `42501` (normally HTTP 401 for `anon`, 403 for `authenticated`). Inspect
+the complete error object, especially `code` and `hint`, and then check in this
+order:
+
+1. Confirm the request has the intended session and database role.
+2. Compare table and column grants with the matrix above.
+3. Confirm the relevant operation has a policy with the correct `TO`, `USING`,
+   and, for writes, `WITH CHECK` clauses.
+4. Reproduce the request in `supabase/tests/database/data_api_rls.test.sql`.
+
+Do not resolve a `42501` by granting broad table access. Change a grant or
+policy only when the product contract requires the operation, and add both an
+allow test and a cross-user deny test in the same change.
+
 ## Configuration notes
 
 - Local JWT lifetime is 900 seconds, matching the approved MVP policy.
