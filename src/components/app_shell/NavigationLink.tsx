@@ -12,6 +12,16 @@ type NavigationLinkProps = {
   variant: "desktop" | "mobile";
 };
 
+const NAVIGATION_LINK_BASE_CLASS_NAME =
+  "relative inline-flex min-h-11 min-w-11 items-center justify-center font-display font-semibold text-text-secondary no-underline transition-colors duration-[var(--motion-fast)] hover:text-primary-hover data-[active=true]:text-primary-hover motion-reduce:transition-none";
+
+const NAVIGATION_LINK_VARIANT_CLASS_NAMES = {
+  desktop:
+    "self-stretch gap-2 px-3 text-[0.9375rem] after:absolute after:inset-x-3 after:-bottom-px after:h-0.5 after:rounded-full after:bg-transparent after:content-[''] data-[active=true]:after:bg-primary lg:px-4 lg:after:inset-x-4",
+  mobile:
+    "min-h-19 min-w-0 flex-col gap-1 px-1 py-2 text-xs leading-4 before:absolute before:top-0 before:h-0.5 before:w-8 before:rounded-full before:bg-transparent before:content-[''] data-[active=true]:bg-gradient-to-b data-[active=true]:from-primary-soft data-[active=true]:to-transparent data-[active=true]:before:bg-primary",
+} as const;
+
 function NavigationIconGraphic({ icon }: { icon: NavigationIcon }) {
   if (icon === "map") {
     return (
@@ -58,12 +68,14 @@ export default function NavigationLink({
 
   return (
     <Link
-      className={`navigationLink navigationLink--${variant}`}
+      className={`${NAVIGATION_LINK_BASE_CLASS_NAME} ${NAVIGATION_LINK_VARIANT_CLASS_NAMES[variant]}`}
       href={href}
       aria-current={isActive ? "page" : undefined}
       data-active={isActive}
     >
-      <span className="navigationLinkIcon">
+      <span
+        className={`grid place-items-center [&_svg]:size-5 [&_svg]:fill-none [&_svg]:stroke-current [&_svg]:[stroke-linecap:round] [&_svg]:[stroke-linejoin:round] [&_svg]:[stroke-width:1.75] ${variant === "desktop" ? "hidden" : ""}`}
+      >
         <NavigationIconGraphic icon={icon} />
       </span>
       <span>{label}</span>
