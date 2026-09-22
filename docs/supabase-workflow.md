@@ -19,6 +19,8 @@ npm run supabase:version
 npm run supabase:start
 npm run supabase:status
 npm run supabase:reset
+npm run supabase:lint
+npm run supabase:test
 npm run supabase:stop
 ```
 
@@ -46,8 +48,14 @@ Edit the generated SQL file, then verify from a clean local database:
 
 ```bash
 npm run supabase:reset
+npm run supabase:lint
+npm run supabase:test
 npx supabase migration list --local
 ```
+
+Database tests live under `supabase/tests/database/` and run with pgTAP. A
+migration is ready for review only when a clean reset, schema lint, database
+tests, and an empty `npx supabase db diff --local --schema public` all pass.
 
 Commit `supabase/config.toml`, `supabase/migrations/`, and
 `supabase/seed.sql`. Do not commit `supabase/.temp`, local environment files,

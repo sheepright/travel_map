@@ -26,6 +26,8 @@
     "supabase:start": "supabase start",
     "supabase:status": "supabase status",
     "supabase:reset": "supabase db reset --local",
+    "supabase:lint": "supabase db lint --local --schema public --level warning --fail-on warning",
+    "supabase:test": "supabase test db --local supabase/tests/database",
     "supabase:stop": "supabase stop"
   },
   "dependencies": {
