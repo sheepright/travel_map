@@ -1,24 +1,24 @@
 :root {
-  --color-canvas: #fffdf8;
-  --color-surface: #ffffff;
-  --color-primary: #3979c6;
-  --color-primary-hover: #2d64a6;
-  --color-primary-soft: #eaf2fc;
-  --color-secondary: #e4eedf;
-  --color-accent: #f6e9bf;
-  --color-text-primary: #303943;
-  --color-text-secondary: #697582;
-  --color-border: #e5e8eb;
-  --color-empty: #eceeeb;
-  --color-success: #527759;
-  --color-success-soft: #e4eedf;
-  --color-error: #ad534c;
-  --color-error-soft: #faebe8;
-  --color-warning: #876c32;
+  --color-canvas-base: #fffdf8;
+  --color-surface-base: #ffffff;
+  --color-primary-base: #3979c6;
+  --color-primary-hover-base: #2d64a6;
+  --color-primary-soft-base: #eaf2fc;
+  --color-secondary-base: #e4eedf;
+  --color-accent-base: #f6e9bf;
+  --color-text-primary-base: #303943;
+  --color-text-secondary-base: #697582;
+  --color-border-base: #e5e8eb;
+  --color-empty-base: #eceeeb;
+  --color-success-base: #527759;
+  --color-success-soft-base: #e4eedf;
+  --color-error-base: #ad534c;
+  --color-error-soft-base: #faebe8;
+  --color-warning-base: #876c32;
 
-  --font-display: "Paperlogy", "Pretendard", -apple-system, BlinkMacSystemFont,
+  --font-display-family: "Paperlogy", "Pretendard", -apple-system, BlinkMacSystemFont,
     "Segoe UI", sans-serif;
-  --font-body: "LeeSeoyun", "Pretendard", -apple-system, BlinkMacSystemFont,
+  --font-body-family: "LeeSeoyun", "Pretendard", -apple-system, BlinkMacSystemFont,
     "Segoe UI", sans-serif;
 
   --font-size-display: 2.75rem;
